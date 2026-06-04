@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mokshita Tiwari | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap');
+
     :root {
       --pink: #ff6eb4;
       --yellow: #ffe033;
@@ -26,21 +26,8 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* CUSTOM CURSOR */
-    .cursor {
-      width: 20px; height: 20px;
-      background: var(--pink);
-      border-radius: 50%;
-      position: fixed; z-index: 9999;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, background 0.3s, width 0.3s, height 0.3s;
-      mix-blend-mode: difference;
     }
 
     /* NAV */
@@ -48,20 +35,21 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 3rem;
-      background: rgba(13,13,13,0.9);
+      background: rgba(13,13,13,0.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: 1.8rem; letter-spacing: 3px;
       background: linear-gradient(90deg, var(--pink), var(--yellow), var(--mint));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       color: var(--muted); text-decoration: none;
-      font-size: 0.9rem; font-weight: 600;
+      font-size: 0.85rem; font-weight: 700;
       transition: color 0.2s; text-transform: uppercase; letter-spacing: 1px;
     }
     .nav-links a:hover { color: var(--pink); }
@@ -75,20 +63,20 @@
       position: relative; overflow: hidden;
     }
 
-    /* Animated background blobs */
     .blob {
       position: absolute; border-radius: 50%;
-      filter: blur(80px); opacity: 0.15;
+      filter: blur(80px); opacity: 0.12;
       animation: blobMove 8s ease-in-out infinite;
+      pointer-events: none;
     }
     .blob1 { width: 500px; height: 500px; background: var(--pink); top: -100px; left: -100px; }
     .blob2 { width: 400px; height: 400px; background: var(--blue); bottom: -100px; right: -100px; animation-delay: -4s; }
     .blob3 { width: 300px; height: 300px; background: var(--yellow); top: 50%; left: 50%; animation-delay: -2s; }
 
     @keyframes blobMove {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px,-30px) scale(1.05); }
+      66% { transform: translate(-20px,20px) scale(0.95); }
     }
 
     .hero-left { position: relative; z-index: 2; }
@@ -98,31 +86,29 @@
       background: rgba(255,110,180,0.1);
       border: 1px solid rgba(255,110,180,0.3);
       color: var(--pink); padding: 0.4rem 1rem;
-      border-radius: 100px; font-size: 0.8rem; font-weight: 700;
+      border-radius: 100px; font-size: 0.8rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 2px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.5rem; display: inline-block;
       animation: fadeUp 0.5s ease both;
     }
-    .hero-tag::before { content: '●'; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
     .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: clamp(4rem, 8vw, 7rem);
       line-height: 0.9; letter-spacing: 2px;
       animation: fadeUp 0.5s 0.1s ease both;
     }
-    .hero h1 .name-line1 { display: block; color: var(--text); }
-    .hero h1 .name-line2 {
+    .name-line1 { display: block; color: var(--text); }
+    .name-line2 {
       display: block;
       background: linear-gradient(135deg, var(--pink) 0%, var(--yellow) 50%, var(--mint) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-desc {
       margin-top: 1.5rem; color: var(--muted);
-      font-size: 1rem; line-height: 1.8;
-      max-width: 460px;
+      font-size: 1rem; line-height: 1.8; max-width: 460px;
       animation: fadeUp 0.5s 0.2s ease both;
     }
     .hero-desc strong { color: var(--text); }
@@ -134,15 +120,14 @@
     }
     .chip {
       padding: 0.4rem 1rem; border-radius: 100px;
-      font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 0.8rem; font-weight: 800; letter-spacing: 0.5px;
     }
-    .chip-pink { background: rgba(255,110,180,0.15); color: var(--pink); border: 1px solid rgba(255,110,180,0.3); }
-    .chip-yellow { background: rgba(255,224,51,0.15); color: var(--yellow); border: 1px solid rgba(255,224,51,0.3); }
-    .chip-mint { background: rgba(63,255,162,0.15); color: var(--mint); border: 1px solid rgba(63,255,162,0.3); }
-    .chip-blue { background: rgba(77,200,255,0.15); color: var(--blue); border: 1px solid rgba(77,200,255,0.3); }
-    .chip-orange { background: rgba(255,140,66,0.15); color: var(--orange); border: 1px solid rgba(255,140,66,0.3); }
-    .chip-purple { background: rgba(181,123,255,0.15); color: var(--purple); border: 1px solid rgba(181,123,255,0.3); }
+    .cp { background: rgba(255,110,180,0.15); color: var(--pink); border: 1px solid rgba(255,110,180,0.3); }
+    .cy { background: rgba(255,224,51,0.15); color: var(--yellow); border: 1px solid rgba(255,224,51,0.3); }
+    .cm { background: rgba(63,255,162,0.15); color: var(--mint); border: 1px solid rgba(63,255,162,0.3); }
+    .cb { background: rgba(77,200,255,0.15); color: var(--blue); border: 1px solid rgba(77,200,255,0.3); }
+    .co { background: rgba(255,140,66,0.15); color: var(--orange); border: 1px solid rgba(255,140,66,0.3); }
+    .cu { background: rgba(181,123,255,0.15); color: var(--purple); border: 1px solid rgba(181,123,255,0.3); }
 
     .hero-btns {
       display: flex; gap: 1rem; margin-top: 2rem;
@@ -153,7 +138,7 @@
       font-size: 0.9rem; font-weight: 800;
       text-decoration: none; transition: all 0.25s;
       text-transform: uppercase; letter-spacing: 1px;
-      font-family: 'Nunito', sans-serif;
+      font-family: inherit;
     }
     .btn-pink {
       background: linear-gradient(135deg, var(--pink), #ff4da6);
@@ -162,7 +147,7 @@
     .btn-pink:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,110,180,0.6); }
     .btn-ghost {
       background: transparent; color: var(--text);
-      border: 2px solid rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.15);
     }
     .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
 
@@ -172,13 +157,11 @@
       display: flex; justify-content: center; align-items: center;
       animation: fadeUp 0.5s 0.2s ease both;
     }
-    .photo-frame {
-      position: relative; width: 320px; height: 380px;
-    }
+    .photo-frame { position: relative; width: 300px; height: 360px; }
     .photo-bg {
-      position: absolute; inset: -12px;
+      position: absolute; inset: -10px;
       background: linear-gradient(135deg, var(--pink), var(--yellow), var(--mint), var(--blue));
-      border-radius: 30px;
+      border-radius: 28px;
       animation: rotateBorder 4s linear infinite;
     }
     @keyframes rotateBorder {
@@ -187,42 +170,34 @@
     }
     .photo-inner {
       position: absolute; inset: 4px;
-      background: var(--card); border-radius: 24px;
-      overflow: hidden;
+      background: var(--card); border-radius: 22px; overflow: hidden;
     }
-    .photo-inner img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-    }
+    .photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .photo-badge {
-      position: absolute; bottom: -16px; right: -16px;
+      position: absolute; bottom: -14px; right: -14px;
       background: var(--yellow); color: #000;
-      padding: 0.6rem 1.2rem; border-radius: 12px;
-      font-size: 0.8rem; font-weight: 800;
+      padding: 0.5rem 1rem; border-radius: 10px;
+      font-size: 0.75rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 1px;
-      box-shadow: 0 8px 24px rgba(255,224,51,0.4);
     }
     .photo-badge2 {
-      position: absolute; top: -16px; left: -16px;
+      position: absolute; top: -14px; left: -14px;
       background: var(--mint); color: #000;
-      padding: 0.6rem 1.2rem; border-radius: 12px;
-      font-size: 0.8rem; font-weight: 800;
+      padding: 0.5rem 1rem; border-radius: 10px;
+      font-size: 0.75rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 1px;
-      box-shadow: 0 8px 24px rgba(63,255,162,0.4);
     }
 
     /* SECTIONS */
     section { padding: 6rem 5rem; }
     .section-eyebrow {
       font-size: 0.75rem; font-weight: 800;
-      letter-spacing: 4px; text-transform: uppercase;
-      margin-bottom: 0.8rem;
+      letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.8rem;
     }
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
-      letter-spacing: 2px; line-height: 1;
-      margin-bottom: 3rem;
+      letter-spacing: 2px; line-height: 1; margin-bottom: 3rem;
     }
     .max-w { max-width: 1100px; margin: 0 auto; }
 
@@ -231,21 +206,8 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; line-height: 1.9; }
     .about-text p strong { color: var(--text); }
-    .fun-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-    .fun-fact {
-      background: var(--card); border-radius: 16px; padding: 1.2rem;
-      border-left: 4px solid;
-      transition: transform 0.2s;
-    }
-    .fun-fact:hover { transform: translateX(4px); }
-    .fun-fact.f1 { border-color: var(--pink); }
-    .fun-fact.f2 { border-color: var(--yellow); }
-    .fun-fact.f3 { border-color: var(--mint); }
-    .fun-fact.f4 { border-color: var(--blue); }
-    .fun-fact .icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
-    .fun-fact h4 { font-size: 0.85rem; font-weight: 800; margin-bottom: 0.2rem; }
-    .fun-fact p { font-size: 0.8rem; color: var(--muted); margin: 0; }
-    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; }
     .stat {
       background: var(--card); border-radius: 16px; padding: 1.5rem;
       text-align: center; border: 1px solid rgba(255,255,255,0.05);
@@ -253,10 +215,20 @@
     }
     .stat:hover { transform: translateY(-4px); }
     .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: 2.8rem; line-height: 1;
     }
     .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+
+    .fun-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fun-fact {
+      background: var(--card); border-radius: 16px; padding: 1.2rem;
+      border-left: 4px solid; transition: transform 0.2s;
+    }
+    .fun-fact:hover { transform: translateX(4px); }
+    .fun-fact .icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .fun-fact h4 { font-size: 0.85rem; font-weight: 800; margin-bottom: 0.2rem; }
+    .fun-fact p { font-size: 0.8rem; color: var(--muted); }
 
     /* PROJECTS */
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
@@ -269,19 +241,19 @@
       content: ''; position: absolute;
       top: 0; left: 0; right: 0; height: 4px;
     }
-    .project-card.pc1::after { background: linear-gradient(90deg, var(--pink), var(--orange)); }
-    .project-card.pc2::after { background: linear-gradient(90deg, var(--blue), var(--mint)); }
+    .pc1::after { background: linear-gradient(90deg, var(--pink), var(--orange)); }
+    .pc2::after { background: linear-gradient(90deg, var(--blue), var(--mint)); }
     .project-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.1); }
     .project-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
     .project-card h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;
     }
     .project-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
     .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.2rem; }
     .ptag {
       padding: 0.25rem 0.7rem; border-radius: 6px;
-      font-size: 0.75rem; font-weight: 700;
+      font-size: 0.75rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 0.5px;
     }
     .project-link {
@@ -294,23 +266,21 @@
 
     /* SKILLS */
     #skills { background: #111; }
-    .skills-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .skills-wrap { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
     .skill-card {
       background: var(--card); border-radius: 20px; padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s;
     }
     .skill-card:hover { transform: translateY(-4px); }
     .skill-card h4 {
       font-size: 0.7rem; font-weight: 800;
       letter-spacing: 3px; text-transform: uppercase;
-      margin-bottom: 1rem; padding-bottom: 0.8rem;
-      border-bottom: 2px solid;
+      margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid;
     }
-    .skill-card.sc1 h4 { border-color: var(--pink); color: var(--pink); }
-    .skill-card.sc2 h4 { border-color: var(--yellow); color: var(--yellow); }
-    .skill-card.sc3 h4 { border-color: var(--mint); color: var(--mint); }
-    .skill-card.sc4 h4 { border-color: var(--blue); color: var(--blue); }
+    .sc1 h4 { border-color: var(--pink); color: var(--pink); }
+    .sc2 h4 { border-color: var(--yellow); color: var(--yellow); }
+    .sc3 h4 { border-color: var(--mint); color: var(--mint); }
+    .sc4 h4 { border-color: var(--blue); color: var(--blue); }
     .skill-item {
       display: flex; align-items: center; gap: 0.5rem;
       padding: 0.4rem 0; font-size: 0.88rem; color: var(--muted);
@@ -339,12 +309,12 @@
     /* CONTACT */
     #contact { background: #111; text-align: center; }
     .contact-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: clamp(3rem, 8vw, 6rem);
       letter-spacing: 3px; line-height: 1;
       background: linear-gradient(135deg, var(--pink), var(--yellow), var(--mint), var(--blue));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      background-clip: text; margin-bottom: 1rem;
     }
     .contact-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; }
     .contact-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
@@ -352,8 +322,7 @@
       display: flex; align-items: center; gap: 0.6rem;
       padding: 0.9rem 2rem; border-radius: 14px;
       text-decoration: none; font-weight: 800; font-size: 0.9rem;
-      text-transform: uppercase; letter-spacing: 1px;
-      transition: all 0.25s;
+      text-transform: uppercase; letter-spacing: 1px; transition: all 0.25s;
     }
     .cbtn-pink { background: rgba(255,110,180,0.1); color: var(--pink); border: 2px solid rgba(255,110,180,0.3); }
     .cbtn-pink:hover { background: var(--pink); color: #000; }
@@ -362,15 +331,12 @@
     .cbtn-mint { background: rgba(63,255,162,0.1); color: var(--mint); border: 2px solid rgba(63,255,162,0.3); }
     .cbtn-mint:hover { background: var(--mint); color: #000; }
 
-    /* FOOTER */
     footer {
-      text-align: center; padding: 2rem;
-      color: var(--muted); font-size: 0.85rem;
+      text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
     footer span { color: var(--pink); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -381,28 +347,25 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; text-align: center; }
-      .hero-right { order: -1; }
-      .photo-frame { width: 220px; height: 260px; }
-      section { padding: 4rem 1.5rem; }
-      .about-grid, .projects-grid, .achieve-grid { grid-template-columns: 1fr; }
-      .skills-wrap { grid-template-columns: 1fr 1fr; }
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; text-align: center; }
+      .hero-right { order: -1; }
+      .photo-frame { width: 220px; height: 260px; }
+      .about-grid, .projects-grid, .achieve-grid { grid-template-columns: 1fr; }
+      .skills-wrap { grid-template-columns: 1fr 1fr; }
       .hero-btns, .hero-chips { justify-content: center; }
       .stat-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
-<div class="cursor" id="cursor"></div>
 
 <nav>
   <div class="nav-logo">Mokshita</div>
@@ -422,21 +385,21 @@
   <div class="blob blob3"></div>
 
   <div class="hero-left">
-    <div class="hero-tag">Open to Work · Bharatpur, Rajasthan</div>
+    <div class="hero-tag">✨ Open to Work · Bharatpur, Rajasthan</div>
     <h1>
       <span class="name-line1">MOKSHITA</span>
       <span class="name-line2">TIWARI</span>
     </h1>
     <p class="hero-desc">
-      B.Tech student at <strong>Banasthali Vidyapith</strong> who is <strong>lazy by default, unstoppable when passionate</strong> 🔥 Future <strong>Engineer + Entrepreneur</strong>. Into AI, Open Source, Skating, Gymnastics & Music 🎤🛼
+      B.Tech student at <strong>Banasthali Vidyapith</strong> — <strong>lazy by default, unstoppable when passionate</strong> 🔥 Future <strong>Engineer + Entrepreneur</strong>. Into AI, Open Source, Skating, Gymnastics & Music 🎤🛼
     </p>
     <div class="hero-chips">
-      <span class="chip chip-pink">🤖 AI / ML</span>
-      <span class="chip chip-yellow">🐍 Python</span>
-      <span class="chip chip-mint">🔓 Open Source</span>
-      <span class="chip chip-blue">🛼 Skating</span>
-      <span class="chip chip-orange">🤸 Gymnastics</span>
-      <span class="chip chip-purple">🎤 Singer</span>
+      <span class="chip cp">🤖 AI / ML</span>
+      <span class="chip cy">🐍 Python</span>
+      <span class="chip cm">🔓 Open Source</span>
+      <span class="chip cb">🛼 Skating</span>
+      <span class="chip co">🤸 Gymnastics</span>
+      <span class="chip cu">🎤 Singer</span>
     </div>
     <div class="hero-btns">
       <a href="#projects" class="btn btn-pink">See My Work</a>
@@ -463,21 +426,20 @@
     <h2 class="section-title">Who Am I?</h2>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>Hey! I'm Mokshita — a <strong>passionate B.Tech student</strong> who might be a little lazy on regular days, but once I set my eyes on something, I give it everything I've got. 💯</p>
+        <p>Hey! I'm Mokshita — a <strong>passionate B.Tech student</strong> who might be a little lazy on regular days, but once I set my eyes on something, I give it everything I've got 💯</p>
         <p>I'm building towards a future where I'm both a <strong>great engineer AND an entrepreneur</strong>. I believe technology should solve real problems, and I want to be the one building those solutions.</p>
         <p>Outside of code, you'll find me on <strong>skating rinks 🛼</strong>, doing <strong>gymnastics 🤸</strong>, or singing my heart out 🎤 — I even performed at my college fest <strong>Mayukh</strong>!</p>
         <p>Currently exploring <strong>AI/ML, Generative AI, Cybersecurity</strong>, and contributing to open-source communities globally.</p>
-
-        <div class="stat-row" style="margin-top:2rem">
-          <div class="stat reveal">
+        <div class="stat-row">
+          <div class="stat">
             <div class="stat-num" style="color:var(--pink)">965+</div>
             <div class="stat-label">LinkedIn Impressions</div>
           </div>
-          <div class="stat reveal">
+          <div class="stat">
             <div class="stat-num" style="color:var(--yellow)">5+</div>
             <div class="stat-label">Certifications</div>
           </div>
-          <div class="stat reveal">
+          <div class="stat">
             <div class="stat-num" style="color:var(--mint)">2</div>
             <div class="stat-label">Open Source Programs</div>
           </div>
@@ -485,9 +447,45 @@
       </div>
 
       <div class="fun-facts reveal">
-        <div class="fun-fact f1">
+        <div class="fun-fact" style="border-color:var(--pink)">
           <div class="icon">🛼</div>
           <h4>Skater</h4>
           <p>Passionate about skating & calisthenics</p>
         </div>
-        <div class="fun-fact f2">
+        <div class="fun-fact" style="border-color:var(--yellow)">
+          <div class="icon">🎤</div>
+          <h4>Singer</h4>
+          <p>Performed at college fest Mayukh</p>
+        </div>
+        <div class="fun-fact" style="border-color:var(--mint)">
+          <div class="icon">🤸</div>
+          <h4>Gymnast</h4>
+          <p>Currently doing gymnastics regularly</p>
+        </div>
+        <div class="fun-fact" style="border-color:var(--blue)">
+          <div class="icon">🚀</div>
+          <h4>Entrepreneur</h4>
+          <p>Dream: Engineer + Founder combo</p>
+        </div>
+        <div class="fun-fact" style="border-color:var(--purple)">
+          <div class="icon">🇩🇪</div>
+          <h4>Language Learner</h4>
+          <p>Learning German — A1 level</p>
+        </div>
+        <div class="fun-fact" style="border-color:var(--orange)">
+          <div class="icon">🤖</div>
+          <h4>AI Enthusiast</h4>
+          <p>Google Gemini Student Ambassador</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <p class="section-eyebrow" style="color:var(--yellow)">— Projects</p>
+    <h2 class="section-title">Things I Built</h2>
+    <div class="projects-grid">
+      <div class="project-card

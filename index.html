@@ -1,0 +1,488 @@
+DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mokshita Tiwari | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;2
+      --surface: #12121a;
+      --accent: #7fffb2;
+      --accent2: #5b8fff;
+      --accent3: #ff6b6b;
+      --text: #e8e8f0;
+      --muted: #6b6b80;
+      --border: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.2rem;
+      color: var(--accent); letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(127,255,178,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(91,143,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 800px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 2px;
+      color: var(--accent); text-transform: uppercase;
+      border: 1px solid rgba(127,255,178,0.3);
+      padding: 0.3rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -2px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      margin-top: 1.5rem; font-size: 1.1rem;
+      color: var(--muted); max-width: 500px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-top: 2rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; margin-top: 2.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .btn {
+      padding: 0.75rem 1.8rem; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none; font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0a0f;
+    }
+    .btn-primary:hover { background: #5de89a; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 3rem;
+    }
+    .max-w { max-width: 1000px; margin: 0 auto; }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--accent); }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--accent); line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .project-card.green::before { background: var(--accent); }
+    .project-card.blue::before { background: var(--accent2); }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+    .project-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .project-card p { color: var(--muted); font-size: 0.9rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .tag {
+      background: rgba(255,255,255,0.05);
+      padding: 0.2rem 0.7rem; border-radius: 100px;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .project-link {
+      display: inline-block; margin-top: 1.2rem;
+      color: var(--accent); font-size: 0.85rem;
+      text-decoration: none; font-weight: 500;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* SKILLS */
+    #skills { background: var(--surface); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-group { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .skill-group h4 {
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      color: var(--muted); font-size: 0.9rem;
+      padding: 0.3rem 0; border-bottom: 1px solid var(--border);
+    }
+    .skill-list li:last-child { border-bottom: none; }
+
+    /* ACHIEVEMENTS */
+    .achieve-list { display: flex; flex-direction: column; gap: 1rem; }
+    .achieve-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .achieve-item:hover { border-color: var(--accent); }
+    .achieve-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .achieve-item h4 { font-weight: 600; margin-bottom: 0.3rem; }
+    .achieve-item p { color: var(--muted); font-size: 0.9rem; }
+
+    /* CONTACT */
+    #contact { background: var(--surface); text-align: center; }
+    #contact .section-title { margin-bottom: 1rem; }
+    #contact p { color: var(--muted); margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 8px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text);
+      transition: all 0.2s;
+    }
+    .contact-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MT.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Work · Bharatpur, Rajasthan</div>
+    <h1>Mokshita<br/><span>Tiwari</span></h1>
+    <p class="hero-sub">B.Tech Student · AI/ML Enthusiast · Open Source Contributor · Google Gemini Student Ambassador</p>
+    <div class="hero-chips">
+      <span class="chip">🐍 Python</span>
+      <span class="chip">🤖 AI / ML</span>
+      <span class="chip">🔓 Open Source</span>
+      <span class="chip">📐 AutoCAD</span>
+      <span class="chip">🔒 Cybersecurity</span>
+      <span class="chip">🇩🇪 German A1</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Turning curiosity<br/>into code.</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm Mokshita, a B.Tech student at Banasthali Vidyapith with a passion for Artificial Intelligence, Generative AI, and Open Source development.</p>
+        <p>Selected as a Google Gemini Student Ambassador 2026 and contributor to GSSoC & Nexus Spring of Code 2026 — I love building real things and growing with the developer community.</p>
+        <p>Currently exploring Python, AI/ML, and Cybersecurity while working on hands-on projects that solve real-world problems.</p>
+      </div>
+      <div class="about-stats fade-in">
+        <div class="stat-card">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">GSSoC Contributor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">965+</div>
+          <div class="stat-label">LinkedIn Post Impressions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Open Source Programs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Things I've built.</h2>
+    <div class="projects-grid">
+      <div class="project-card green fade-in">
+        <div class="project-icon">🎮</div>
+        <h3>Hangman Game</h3>
+        <p>Classic Hangman built in Python with word guessing logic, lives tracking, and interactive terminal gameplay.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Game Logic</span>
+          <span class="tag">CLI</span>
+        </div>
+        <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card blue fade-in">
+        <div class="project-icon">🤖</div>
+        <h3>Python Chatbot</h3>
+        <p>An interactive chatbot built with Python, capable of basic conversation, rule-based responses, and user interaction flows.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">AI</span>
+        </div>
+        <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">My toolkit.</h2>
+    <div class="skills-grid fade-in">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>C / C++</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <ul class="skill-list">
+          <li>AutoCAD</li>
+          <li>GitHub</li>
+          <li>Microsoft 365 Copilot</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Domains</h4>
+        <ul class="skill-list">
+          <li>Artificial Intelligence</li>
+          <li>Generative AI</li>
+          <li>Cybersecurity</li>
+          <li>Open Source</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Languages (Spoken)</h4>
+        <ul class="skill-list">
+          <li>English (Proficient)</li>
+          <li>German (A1)</li>
+          <li>Hindi (Native)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="max-w">
+    <p class="section-label">Achievements</p>
+    <h2 class="section-title">Milestones.</h2>
+    <div class="achieve-list">
+      <div class="achieve-item fade-in">
+        <div class="achieve-icon">🌟</div>
+        <div>
+          <h4>Google Gemini Student Ambassador 2026</h4>
+          <p>Selected out of thousands of applicants across India to represent Google's AI ecosystem on campus.</p>
+        </div>
+      </div>
+      <div class="achieve-item fade-in">
+        <div class="achieve-icon">👩‍💻</div>
+        <div>
+          <h4>GSSoC 2026 — Contributor & Mentee</h4>
+          <p>Selected for GirlScript Summer of Code 2026 Open Source Track, contributing to global open-source repositories.</p>
+        </div>
+      </div>
+      <div class="achieve-item fade-in">
+        <div class="achieve-icon">💻</div>
+        <div>
+          <h4>Nexus Spring of Code 2026</h4>
+          <p>Selected as Contributor (SSOC '26), collaborating on real-world open-source projects.</p>
+        </div>
+      </div>
+      <div class="achieve-item fade-in">
+        <div class="achieve-icon">🏛️</div>
+        <div>
+          <h4>India AI Impact Pre-Summit 2026</h4>
+          <p>"Women in AI: Shaping Digital India" — Feb 7–8, 2026, organized by Centre for AI, Banasthali Vidyapith.</p>
+        </div>
+      </div>
+      <div class="achieve-item fade-in">
+        <div class="achieve-icon">🎓</div>
+        <div>
+          <h4>Python Programming Intern — CodeAlpha</h4>
+          <p>Internship at MSME-recognized CodeAlpha, working on real-world Python applications.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's connect.</h2>
+    <p>Open to collaborations, internships, and open source projects!</p>
+    <div class="contact-links">
+      <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="contact-btn">⚡ GitHub</a>
+      <a href="https://linkedin.com/in/mokshitatiwari" target="_blank" class="contact-btn">💼 LinkedIn</a>
+      <a href="mailto:mokshita@example.com" class="contact-btn">📧 Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Mokshita Tiwari · 2026 · Bharatpur, Rajasthan 🇮🇳</p>
+</footer>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

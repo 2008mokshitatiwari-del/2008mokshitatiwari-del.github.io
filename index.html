@@ -1,916 +1,979 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mokshita Tiwari | AI Enthusiast & Developer Portfolio</title>
-    <meta name="description" content="Portfolio of Mokshita Tiwari - B.Tech student, AI/Generative AI enthusiast, Cybersecurity explorer, and Open-Source contributor.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- CSS stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mokshita Tiwari — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Nunito:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg:        #080b14;
+  --bg2:       #0d1220;
+  --bg3:       #111827;
+  --c1:        #ff6b6b;   /* coral-red */
+  --c2:        #ffd93d;   /* golden yellow */
+  --c3:        #6bceff;   /* sky blue */
+  --c4:        #a78bfa;   /* violet */
+  --c5:        #34d399;   /* emerald */
+  --c6:        #fb923c;   /* orange */
+  --text:      #f0f4ff;
+  --muted:     rgba(240,244,255,0.55);
+  --border:    rgba(255,255,255,0.07);
+  --ff-head:   'Syne', sans-serif;
+  --ff-body:   'Nunito', sans-serif;
+  --ff-mono:   'DM Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════ */
+#cursor {
+  width: 18px; height: 18px;
+  background: var(--c1);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease;
+}
+#cursor-trail {
+  width: 38px; height: 38px;
+  border: 1.5px solid var(--c3);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.35s ease;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════
+   NOISE OVERLAY
+═══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 4rem;
+  background: rgba(8,11,20,0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--ff-head);
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--c1); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--c1);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  padding: 6rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated mesh blobs */
+.hero::before, .hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+.hero::before {
+  width: 500px; height: 500px;
+  background: var(--c4);
+  top: -100px; right: 0;
+}
+.hero::after {
+  width: 380px; height: 380px;
+  background: var(--c1);
+  bottom: -80px; left: 10%;
+  animation-delay: -6s;
+}
+@keyframes drift {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(40px,30px) scale(1.1); }
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-pre {
+  font-family: var(--ff-mono);
+  font-size: 0.82rem;
+  color: var(--c3);
+  letter-spacing: 0.18em;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadein 0.6s 0.2s forwards;
+}
+.hero-name {
+  font-family: var(--ff-head);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+  opacity: 0;
+  animation: slidein 0.7s 0.4s forwards;
+}
+.hero-name .grad {
+  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline {
+  font-family: var(--ff-head);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--c5);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadein 0.6s 0.6s forwards;
+}
+.hero-desc {
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  max-width: 480px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadein 0.6s 0.8s forwards;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 2.2rem;
+  opacity: 0;
+  animation: fadein 0.6s 1s forwards;
+}
+.badge {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+}
+.b1 { color: var(--c1); border-color: var(--c1); background: rgba(255,107,107,0.08); }
+.b2 { color: var(--c3); border-color: var(--c3); background: rgba(107,206,255,0.08); }
+.b3 { color: var(--c5); border-color: var(--c5); background: rgba(52,211,153,0.08); }
+.b4 { color: var(--c2); border-color: var(--c2); background: rgba(255,217,61,0.08); }
+.b5 { color: var(--c4); border-color: var(--c4); background: rgba(167,139,250,0.08); }
+.b6 { color: var(--c6); border-color: var(--c6); background: rgba(251,146,60,0.08); }
+
+.hero-ctas {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadein 0.6s 1.2s forwards;
+}
+.cta-primary {
+  background: linear-gradient(135deg, var(--c1), var(--c6));
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 100px;
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 24px rgba(255,107,107,0.3);
+}
+.cta-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 32px rgba(255,107,107,0.45); }
+.cta-ghost {
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  padding: 13px 28px;
+  border-radius: 100px;
+  font-family: var(--ff-head);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cta-ghost:hover { border-color: var(--c3); transform: translateY(-3px); }
+
+/* hero photo side */
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+  opacity: 0;
+  animation: fadein 0.8s 0.5s forwards;
+}
+.photo-frame {
+  position: relative;
+  width: 320px; height: 380px;
+}
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, var(--c1), var(--c4), var(--c3), var(--c2));
+  z-index: -1;
+  animation: spin-grad 6s linear infinite;
+}
+@keyframes spin-grad {
+  to { filter: hue-rotate(360deg); }
+}
+.photo-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 26px;
+  display: block;
+  background: var(--bg3);
+}
+.photo-placeholder {
+  width: 100%; height: 100%;
+  border-radius: 26px;
+  background: linear-gradient(135deg, var(--bg3), #1a2035);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: var(--ff-head);
+  font-size: 5rem; font-weight: 800;
+  color: var(--c1);
+  letter-spacing: -0.05em;
+}
+.photo-placeholder .sub {
+  font-size: 0.75rem;
+  font-family: var(--ff-mono);
+  color: var(--muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.1em;
+}
+.orbit-badge {
+  position: absolute;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.ob1 { top: -16px; right: -20px; color: var(--c2); border-color: rgba(255,217,61,0.3); }
+.ob2 { bottom: 30px; left: -30px; color: var(--c5); border-color: rgba(52,211,153,0.3); }
+.ob3 { bottom: -16px; right: 10px; color: var(--c3); border-color: rgba(107,206,255,0.3); }
+
+/* ═══════════════════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════════════════ */
+section { position: relative; z-index: 1; }
+.section-wrap { padding: 6rem 4rem; }
+.section-wrap.alt { background: var(--bg2); }
+.sec-label {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  color: var(--c3);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.sec-title {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 3rem;
+}
+.sec-title em { font-style: normal; color: var(--c1); }
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.about-para {
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 0.98rem;
+  margin-bottom: 1.2rem;
+}
+.about-para strong { color: var(--text); font-weight: 600; }
+.fun-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.fun-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.fun-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+.fun-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.fun-title { font-family: var(--ff-head); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.25rem; }
+.fun-desc { font-family: var(--ff-mono); font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+
+/* language */
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(107,206,255,0.08);
+  border: 1px solid rgba(107,206,255,0.25);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  color: var(--c3);
+  margin-top: 1rem;
+}
+.lang-flag { font-size: 1.1rem; }
+
+/* ═══════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════ */
+.skills-grid {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+}
+.skill-chip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.skill-chip:hover { transform: translateY(-3px); }
+.skill-chip .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sk1 { box-shadow: 0 0 0 0 var(--c1); }
+.sk1:hover { box-shadow: 0 4px 20px rgba(255,107,107,0.25); border-color: rgba(255,107,107,0.4); }
+.sk1 .dot { background: var(--c1); }
+.sk2:hover { box-shadow: 0 4px 20px rgba(107,206,255,0.25); border-color: rgba(107,206,255,0.4); }
+.sk2 .dot { background: var(--c3); }
+.sk3:hover { box-shadow: 0 4px 20px rgba(52,211,153,0.25); border-color: rgba(52,211,153,0.4); }
+.sk3 .dot { background: var(--c5); }
+.sk4:hover { box-shadow: 0 4px 20px rgba(167,139,250,0.25); border-color: rgba(167,139,250,0.4); }
+.sk4 .dot { background: var(--c4); }
+.sk5:hover { box-shadow: 0 4px 20px rgba(255,217,61,0.25); border-color: rgba(255,217,61,0.4); }
+.sk5 .dot { background: var(--c2); }
+
+/* ═══════════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.proj-card {
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg3);
+  transition: transform 0.3s, border-color 0.3s;
+  position: relative;
+}
+.proj-card:hover { transform: translateY(-6px); }
+.proj-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.proj-card:nth-child(1)::before { background: linear-gradient(90deg, var(--c1), var(--c6)); }
+.proj-card:nth-child(2)::before { background: linear-gradient(90deg, var(--c3), var(--c4)); }
+.proj-card:hover { border-color: rgba(255,255,255,0.12); }
+.proj-header {
+  padding: 2rem 2rem 1rem;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.proj-icon { font-size: 2.2rem; }
+.proj-link {
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.proj-link:hover { color: var(--c3); border-color: var(--c3); }
+.proj-body { padding: 0 2rem 2rem; }
+.proj-title {
+  font-family: var(--ff-head);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+.proj-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+.proj-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.ptag {
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════
+   ACHIEVEMENTS
+═══════════════════════════════════════════ */
+.ach-list { display: flex; flex-direction: column; gap: 1rem; }
+.ach-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.ach-item:hover { transform: translateX(6px); border-color: rgba(255,255,255,0.12); }
+.ach-emoji {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.ae1 { background: rgba(255,107,107,0.12); }
+.ae2 { background: rgba(107,206,255,0.12); }
+.ae3 { background: rgba(52,211,153,0.12); }
+.ae4 { background: rgba(255,217,61,0.12); }
+.ae5 { background: rgba(167,139,250,0.12); }
+.ae6 { background: rgba(251,146,60,0.12); }
+.ae7 { background: rgba(255,107,107,0.12); }
+.ae8 { background: rgba(107,206,255,0.12); }
+.ae9 { background: rgba(52,211,153,0.12); }
+.ach-text { }
+.ach-title {
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.ach-sub {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact-inner {
+  text-align: center;
+  position: relative;
+}
+.contact-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(167,139,250,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.contact-big {
+  font-family: var(--ff-head);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.contact-big .grad {
+  background: linear-gradient(90deg, var(--c1), var(--c4), var(--c3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.contact-sub {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.contact-cards {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+  position: relative;
+}
+.contact-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  font-family: var(--ff-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.contact-card:hover { transform: translateY(-3px); }
+.cc1:hover { border-color: rgba(255,107,107,0.5); box-shadow: 0 6px 24px rgba(255,107,107,0.15); color: var(--c1); }
+.cc2:hover { border-color: rgba(107,206,255,0.5); box-shadow: 0 6px 24px rgba(107,206,255,0.15); color: var(--c3); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+footer span { color: var(--c1); }
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slidein {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+  .hero-visual { order: -1; }
+  .photo-frame { width: 240px; height: 290px; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .section-wrap { padding: 4rem 1.5rem; }
+  .fun-facts { grid-template-columns: 1fr; }
+  .orbit-badge { display: none; }
+}
+</style>
 </head>
 <body>
-    <!-- Background glow elements -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-dot"></div>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
 
-    <!-- Header / Navbar -->
-    <header class="glass-nav">
-        <div class="container nav-container">
-            <a href="#" class="logo" id="nav-logo">
-                Mokshita<span class="accent-dot">.</span>
-            </a>
-            <nav class="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-            <div class="nav-actions">
-                <button id="theme-toggle" aria-label="Toggle theme" class="icon-btn">
-                    <i data-lucide="moon" class="theme-icon-dark"></i>
-                    <i data-lucide="sun" class="theme-icon-light"></i>
-                </button>
-                <a href="#contact" class="btn btn-sm btn-primary hide-mobile">Hire Me</a>
-                <button class="mobile-menu-btn icon-btn" aria-label="Toggle menu">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home"><span>M</span>okshita</a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#achievements">achievements</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section id="home">
+<div class="hero">
+  <div class="hero-content">
+    <p class="hero-pre">// hello world &nbsp;—&nbsp; welcome to my corner</p>
+    <h1 class="hero-name">
+      <span class="grad">Mokshita</span><br>Tiwari
+    </h1>
+    <p class="hero-tagline">Future Engineer &amp; Entrepreneur ✦</p>
+    <p class="hero-desc">
+      B.Tech student at <strong>Banasthali Vidyapith</strong>, Bharatpur, Rajasthan. Lazy by default — <em>unstoppable when passionate</em>. I build things with code, skate for fun, sing on stage, and dream in algorithms.
+    </p>
+    <div class="hero-badges">
+      <span class="badge b1">🤖 AI/ML</span>
+      <span class="badge b2">🔐 Cybersecurity</span>
+      <span class="badge b3">🐍 Python</span>
+      <span class="badge b4">⭐ Google Ambassador</span>
+      <span class="badge b5">🌍 Open Source</span>
+      <span class="badge b6">🎵 Singer</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="cta-primary">View GitHub ↗</a>
+      <a href="#contact" class="cta-ghost">Say Hello →</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="photo-frame">
+      <img src="WhatsApp Image 2026-06-04 at 14.20.02.jpeg"
+           alt="Mokshita Tiwari"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="photo-placeholder" style="display:none;">
+        MT
+        <span class="sub">Mokshita Tiwari</span>
+      </div>
+      <div class="orbit-badge ob1">✦ Google Ambassador 2026</div>
+      <div class="orbit-badge ob2">🌱 GSSoC Contributor</div>
+      <div class="orbit-badge ob3">🎵 Singer @ Mayukh</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about">
+<div class="section-wrap alt">
+  <p class="sec-label reveal">// who am I</p>
+  <h2 class="sec-title reveal">A little bit about <em>me</em></h2>
+  <div class="about-grid">
+    <div>
+      <p class="about-para reveal">
+        I'm <strong>Mokshita Tiwari</strong> — a B.Tech student at <strong>Banasthali Vidyapith</strong>, one of India's premier women's universities, located in Bharatpur, Rajasthan. I'm on a mission to merge engineering with entrepreneurship and make a real dent in the world of tech.
+      </p>
+      <p class="about-para reveal">
+        My motto? <strong>"Lazy by default, unstoppable when passionate."</strong> Give me a problem I care about and I won't stop until it's solved. I've contributed to open source, earned certifications from Google and Microsoft, and performed as a singer at our college fest <strong>Mayukh</strong> — all while learning German on the side.
+      </p>
+      <p class="about-para reveal">
+        I believe in building things that matter, learning in public, and never being the smartest person in the room — because that means there's always more to absorb.
+      </p>
+      <div class="lang-pill reveal">
+        <span class="lang-flag">🇩🇪</span>
+        Currently learning <strong>German</strong> &nbsp;·&nbsp; Level A1
+      </div>
+    </div>
+    <div class="fun-facts">
+      <div class="fun-card reveal">
+        <div class="fun-icon">⛸️</div>
+        <div class="fun-title">Skating</div>
+        <div class="fun-desc">On wheels or ice, I find flow and freedom.</div>
+      </div>
+      <div class="fun-card reveal">
+        <div class="fun-icon">🤸</div>
+        <div class="fun-title">Gymnastics</div>
+        <div class="fun-desc">Flexibility in body, flexibility in thinking.</div>
+      </div>
+      <div class="fun-card reveal">
+        <div class="fun-icon">🎤</div>
+        <div class="fun-title">Singer</div>
+        <div class="fun-desc">Performed live at college fest Mayukh. Music is my other language.</div>
+      </div>
+      <div class="fun-card reveal">
+        <div class="fun-icon">🚀</div>
+        <div class="fun-title">Entrepreneur</div>
+        <div class="fun-desc">Future founder. Currently ideating, always building.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════ SKILLS ══════ -->
+<section id="skills">
+<div class="section-wrap">
+  <p class="sec-label reveal">// my toolbox</p>
+  <h2 class="sec-title reveal">Skills &amp; <em>Technologies</em></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-chip sk1"><span class="dot"></span>Python</div>
+    <div class="skill-chip sk2"><span class="dot"></span>C</div>
+    <div class="skill-chip sk3"><span class="dot"></span>GitHub</div>
+    <div class="skill-chip sk4"><span class="dot"></span>AI / Machine Learning</div>
+    <div class="skill-chip sk5"><span class="dot"></span>Generative AI</div>
+    <div class="skill-chip sk1"><span class="dot"></span>Cybersecurity</div>
+    <div class="skill-chip sk2"><span class="dot"></span>AutoCAD</div>
+    <div class="skill-chip sk3"><span class="dot"></span>MS 365 Copilot</div>
+    <div class="skill-chip sk4"><span class="dot"></span>Open Source</div>
+    <div class="skill-chip sk5"><span class="dot"></span>Prompt Engineering</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════ PROJECTS ══════ -->
+<section id="projects">
+<div class="section-wrap alt">
+  <p class="sec-label reveal">// what I've built</p>
+  <h2 class="sec-title reveal">My <em>Projects</em></h2>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <span class="proj-icon">🎮</span>
+        <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+      <div class="proj-body">
+        <h3 class="proj-title">Hangman Game</h3>
+        <p class="proj-desc">
+          A classic word-guessing game built in Python. Features vocabulary lists, lives counter, and ASCII art rendering. Clean CLI experience that sharpened my logic and string manipulation skills.
+        </p>
+        <div class="proj-tags">
+          <span class="ptag">Python</span>
+          <span class="ptag">CLI</span>
+          <span class="ptag">Game Logic</span>
+          <span class="ptag">ASCII Art</span>
         </div>
-    </header>
-
-    <!-- Mobile Drawer -->
-    <div class="mobile-drawer">
-        <nav class="mobile-nav-links">
-            <a href="#home" class="mobile-link">Home</a>
-            <a href="#about" class="mobile-link">About</a>
-            <a href="#skills" class="mobile-link">Skills</a>
-            <a href="#projects" class="mobile-link">Projects</a>
-            <a href="#contact" class="mobile-link">Contact</a>
-            <a href="#contact" class="btn btn-primary">Hire Me</a>
-        </nav>
+      </div>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <div class="badge-glow">
-                    <span class="pulse-dot"></span>
-                    <span>Open to Opportunities</span>
-                </div>
-                <h1 class="hero-title">
-                    Hi, I'm <br>
-                    <span class="text-gradient">Mokshita Tiwari</span>
-                </h1>
-                <h2 class="hero-subtitle">
-                    I am a <span id="typewriter"></span><span class="cursor-blink">|</span>
-                </h2>
-                <p class="hero-tagline">
-                    "Lazy by default, unstoppable when passionate."
-                </p>
-                <p class="hero-desc">
-                    I'm a B.Tech student at Banasthali Vidyapith with a deep drive for technology, innovation, and continuous growth. Passionate about Artificial Intelligence, GenAI, Cybersecurity, and Open Source. I build projects to solve problems and continuously level up.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>View Projects</span>
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Let's Connect</span>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="hero-circle-container">
-                    <div class="glow-ring glow-ring-1"></div>
-                    <div class="glow-ring glow-ring-2"></div>
-                    <div class="glow-ring glow-ring-3"></div>
-                    <div class="hero-avatar-container">
-                        <img src="avatar.jpg" alt="Mokshita Tiwari" class="hero-avatar">
-                    </div>
-                    <div class="profile-card glass-card">
-                        <div class="card-header">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
-                            <span class="file-name">mokshita_tiwari.py</span>
-                        </div>
-                        <div class="card-body">
-                            <pre><code class="code-editor"><span class="code-keyword">class</span> <span class="code-class">MokshitaTiwari</span>:
-    <span class="code-keyword">def</span> <span class="code-method">__init__</span>(self):
-        self.role = <span class="code-string">"B.Tech Student"</span>
-        self.college = <span class="code-string">"Banasthali Vidyapith"</span>
-        self.passions = [
-            <span class="code-string">"AI"</span>, <span class="code-string">"Generative AI"</span>, 
-            <span class="code-string">"Cybersecurity"</span>, <span class="code-string">"OpenSource"</span>
-        ]
-        self.motto = <span class="code-string">"Learn, Create, Impact"</span>
-
-    <span class="code-keyword">def</span> <span class="code-method">get_status</span>(self):
-        <span class="code-keyword">return</span> <span class="code-string">"Building the future... 🚀"</span></code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <span class="proj-icon">🤖</span>
+        <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+      <div class="proj-body">
+        <h3 class="proj-title">AI Chatbot</h3>
+        <p class="proj-desc">
+          A conversational AI chatbot built with Python. Leverages NLP techniques for intent recognition and dynamic responses. A hands-on exploration of machine learning fundamentals and dialogue systems.
+        </p>
+        <div class="proj-tags">
+          <span class="ptag">Python</span>
+          <span class="ptag">NLP</span>
+          <span class="ptag">AI / ML</span>
+          <span class="ptag">Chatbot</span>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section scroll-offset">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Get to know me</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="divider"></div>
-            </div>
-            <div class="about-grid">
-                <div class="about-info-panel glass-card">
-                    <h3>My Story</h3>
-                    <p>I am currently pursuing my Bachelor of Technology (B.Tech) at <strong>Banasthali Vidyapith</strong>. My journey in tech is driven by an insatiable curiosity about how things work under the hood and a vision to design smart solutions for real-world issues.</p>
-                    <p>I actively participate in developer communities like GSSoC (GirlScript Summer of Code) which introduced me to the power of open-source development and collaborative building. I believe that true growth happens when you build, fail, iterate, and share knowledge with others.</p>
-                    <p>My ultimate goal is to evolve into a versatile engineer and entrepreneur, combining technical skills and creative leadership to deliver impactful innovations.</p>
-                </div>
-                <div class="hobbies-panel">
-                    <h3>Beyond Academics & Tech 🌟</h3>
-                    <p class="hobbies-intro">When I'm not writing code or analyzing security configurations, you can find me expressing my creativity and energy in various fields:</p>
-                    <div class="hobbies-grid">
-                        <div class="hobby-card glass-card">
-                            <div class="hobby-icon">⛸️</div>
-                            <h4>Skating</h4>
-                            <p>Balancing speed and precision, skating keeps me focused and active.</p>
-                        </div>
-                        <div class="hobby-card glass-card">
-                            <div class="hobby-icon">🤸‍♀️</div>
-                            <h4>Gymnastics</h4>
-                            <p>Building strength, flexibility, and physical discipline step by step.</p>
-                        </div>
-                        <div class="hobby-card glass-card">
-                            <div class="hobby-icon">🎤</div>
-                            <h4>Singing</h4>
-                            <p>A creative escape to express myself musically and unwind.</p>
-                        </div>
-                        <div class="hobby-card glass-card">
-                            <div class="hobby-icon">🇩🇪</div>
-                            <h4>German</h4>
-                            <p>Learning new languages expands my horizons and challenges my mind.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section scroll-offset">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Capabilities</span>
-                <h2 class="section-title">Skills & Interests</h2>
-                <div class="divider"></div>
-            </div>
-            <div class="skills-grid">
-                <!-- Skill Category 1 -->
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i data-lucide="cpu" class="category-icon"></i>
-                        <h3>Artificial Intelligence</h3>
-                    </div>
-                    <p class="category-desc">Exploring deep learning, conversational agents, and creative AI models.</p>
-                    <ul class="skills-list">
-                        <li><span>Artificial Intelligence</span><div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div></li>
-                        <li><span>Generative AI (LLMs)</span><div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div></li>
-                        <li><span>Python Programming</span><div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div></li>
-                        <li><span>NLP & Chatbots</span><div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div></li>
-                    </ul>
-                </div>
-
-                <!-- Skill Category 2 -->
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i data-lucide="shield-alert" class="category-icon"></i>
-                        <h3>Cybersecurity</h3>
-                    </div>
-                    <p class="category-desc">Learning network security protocols, threats mitigations, and safe coding practices.</p>
-                    <ul class="skills-list">
-                        <li><span>Network Security</span><div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div></li>
-                        <li><span>Information Security</span><div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div></li>
-                        <li><span>Cryptography Basics</span><div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div></li>
-                        <li><span>Secure Coding Rules</span><div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div></li>
-                    </ul>
-                </div>
-
-                <!-- Skill Category 3 -->
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i data-lucide="git-pull-request" class="category-icon"></i>
-                        <h3>Open Source & Dev</h3>
-                    </div>
-                    <p class="category-desc">Collaborating in global communities and building full-stack web layouts.</p>
-                    <ul class="skills-list">
-                        <li><span>Git & GitHub Workflows</span><div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div></li>
-                        <li><span>Web Technologies (HTML/CSS/JS)</span><div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div></li>
-                        <li><span>GSSoC Contributions</span><div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div></li>
-                        <li><span>Data Structures & Algos</span><div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section scroll-offset">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Showcase</span>
-                <h2 class="section-title">My Projects</h2>
-                <div class="divider"></div>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card glass-card">
-                    <div class="project-image-placeholder prj-gradient-1">
-                        <i data-lucide="message-square-code"></i>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag">AI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">GenAI</span>
-                        </div>
-                        <h3>AI Chatbot</h3>
-                        <p class="project-desc-text">An interactive chatbot built using NLP principles and API integrations. Designed to handle user prompts, parse intent, and deliver contextual, human-like responses with a sleek interface.</p>
-                        <div class="project-links">
-                            <a href="https://github.com" target="_blank" class="prj-link"><i data-lucide="github"></i> Code</a>
-                            <button class="btn btn-sm btn-outline-accent open-chatbot-demo">View Demo</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 (Interactive Widget) -->
-                <div class="project-card glass-card hangman-project-card">
-                    <div class="project-image-placeholder prj-gradient-2">
-                        <i data-lucide="gamepad-2"></i>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag">Javascript</span>
-                            <span class="tag">GameDev</span>
-                            <span class="tag">Interactive</span>
-                        </div>
-                        <h3>Hangman Game</h3>
-                        <p class="project-desc-text">A classic word-guessing game featuring interactive graphics. I've integrated a playable version directly below! Test your tech vocabulary and save the stickman.</p>
-                        <div class="project-links">
-                            <a href="https://github.com" target="_blank" class="prj-link"><i data-lucide="github"></i> Code</a>
-                            <a href="#hangman-interactive" class="btn btn-sm btn-accent scroll-to-hangman">Play Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card glass-card">
-                    <div class="project-image-placeholder prj-gradient-3">
-                        <i data-lucide="globe"></i>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag">Open Source</span>
-                            <span class="tag">GSSoC</span>
-                            <span class="tag">Git</span>
-                        </div>
-                        <h3>Open Source Initiatives</h3>
-                        <p class="project-desc-text">Active participant in the GirlScript Summer of Code (GSSoC). Contributed to front-end upgrades, documentation refinements, and bug fixes across diverse open-source repositories.</p>
-                        <div class="project-links">
-                            <a href="https://github.com" target="_blank" class="prj-link"><i data-lucide="external-link"></i> Contributions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Hangman Game Block -->
-            <div id="hangman-interactive" class="hangman-container glass-card">
-                <div class="hangman-header">
-                    <i data-lucide="gamepad-2" class="accent-color"></i>
-                    <h3>Play Interactive Hangman</h3>
-                </div>
-                <div class="hangman-layout">
-                    <div class="hangman-gallows-box">
-                        <svg class="hangman-svg" viewBox="0 0 100 100" width="150" height="150">
-                            <!-- Gallows base -->
-                            <line x1="10" y1="90" x2="90" y2="90" class="gallows-line base" />
-                            <!-- Gallows post -->
-                            <line x1="30" y1="90" x2="30" y2="10" class="gallows-line pole" />
-                            <!-- Gallows beam -->
-                            <line x1="30" y1="10" x2="70" y2="10" class="gallows-line top" />
-                            <!-- Gallows rope -->
-                            <line x1="70" y1="10" x2="70" y2="25" class="gallows-line rope" />
-                            
-                            <!-- Hangman parts -->
-                            <circle cx="70" cy="32" r="7" class="hangman-part part-head" />
-                            <line x1="70" y1="39" x2="70" y2="60" class="hangman-part part-body" />
-                            <line x1="70" y1="45" x2="55" y2="52" class="hangman-part part-left-arm" />
-                            <line x1="70" y1="45" x2="85" y2="52" class="hangman-part part-right-arm" />
-                            <line x1="70" y1="60" x2="55" y2="75" class="hangman-part part-left-leg" />
-                            <line x1="70" y1="60" x2="85" y2="75" class="hangman-part part-right-leg" />
-                        </svg>
-                        <div class="lives-counter">Tries Left: <span id="tries-left" class="highlight-val">6</span></div>
-                    </div>
-                    <div class="hangman-gameplay-box">
-                        <p class="game-instruction">Guess the tech word related to my profile!</p>
-                        <div class="word-display" id="word-display">_ _ _ _ _ _ _</div>
-                        <div class="keyboard" id="keyboard">
-                            <!-- JS will generate keys -->
-                        </div>
-                        <div class="game-actions">
-                            <span id="game-status-msg" class="status-msg"></span>
-                            <button id="reset-hangman-btn" class="btn btn-accent btn-sm"><i data-lucide="rotate-ccw"></i> Restart Game</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section scroll-offset">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Let's talk</span>
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="divider"></div>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-cards">
-                    <div class="contact-card glass-card">
-                        <i data-lucide="mail" class="contact-icon"></i>
-                        <div>
-                            <h4>Email Me</h4>
-                            <p><a href="mailto:mokshita@example.com">mokshita@example.com</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-card glass-card">
-                        <i data-lucide="linkedin" class="contact-icon"></i>
-                        <div>
-                            <h4>Connect</h4>
-                            <p><a href="https://linkedin.com" target="_blank">linkedin.com/in/mokshita</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-card glass-card">
-                        <i data-lucide="github" class="contact-icon"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <p><a href="https://github.com" target="_blank">github.com/mokshita</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-card glass-card">
-                        <i data-lucide="map-pin" class="contact-icon"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Banasthali Vidyapith, Rajasthan, India</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-panel glass-card">
-                    <h3>Send a Message</h3>
-                    <form id="contact-form" autocomplete="off">
-                        <div class="form-row">
-                            <div class="input-group">
-                                <input type="text" id="form-name" required placeholder=" ">
-                                <label for="form-name">Your Name</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="email" id="form-email" required placeholder=" ">
-                                <label for="form-email">Your Email</label>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" id="form-subject" required placeholder=" ">
-                            <label for="form-subject">Subject</label>
-                        </div>
-                        <div class="input-group">
-                            <textarea id="form-message" required rows="5" placeholder=" "></textarea>
-                            <label for="form-message">Your Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary form-submit-btn">
-                            <span>Send Message</span>
-                            <i data-lucide="send"></i>
-                        </button>
-                        <div id="form-status" class="form-status-box"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <p class="copyright">&copy; 2026 Mokshita Tiwari. Built with passion & innovation.</p>
-            <div class="social-links">
-                <a href="https://github.com" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
-                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                <a href="mailto:mokshita@example.com" aria-label="Email"><i data-lucide="mail"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chatbot Demo Modal Overlay -->
-    <div class="modal-overlay" id="chatbot-modal">
-        <div class="modal-content glass-card">
-            <div class="modal-header">
-                <div class="modal-title-box">
-                    <i data-lucide="message-square-code" class="accent-color"></i>
-                    <h3>AI Chatbot Demo Interface</h3>
-                </div>
-                <button class="modal-close icon-btn" aria-label="Close modal">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <div class="modal-body chat-demo-body">
-                <div class="chat-window">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="chat-msg system">
-                            <p><strong>System:</strong> AI Chatbot initialized successfully. Python Backend listening.</p>
-                        </div>
-                        <div class="chat-msg bot">
-                            <div class="avatar-sm">AI</div>
-                            <div class="msg-bubble">
-                                Hallo! (Yes, I speak German too!). I am Mokshita's AI Assistant. How can I help you today?
-                            </div>
-                        </div>
-                    </div>
-                    <form class="chat-input-bar" id="chat-demo-form">
-                        <input type="text" id="chat-user-input" placeholder="Ask about Mokshita's skills, college, GSSoC..." required>
-                        <button type="submit" class="chat-send-btn"><i data-lucide="send"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!document.addEventListener("DOMContentLoaded", () => {
-    // Initialize Lucide Icons
-    lucide.createIcons();
+  </div>
+</div>
+</section>
 
-    /* ==========================================================================
-       THEME TOGGLER
-       ========================================================================== */
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const htmlElement = document.documentElement;
+<!-- ══════ ACHIEVEMENTS ══════ -->
+<section id="achievements">
+<div class="section-wrap">
+  <p class="sec-label reveal">// milestones</p>
+  <h2 class="sec-title reveal">Achievements &amp; <em>Certifications</em></h2>
+  <div class="ach-list">
 
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    htmlElement.setAttribute("data-theme", savedTheme);
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae1">⭐</div>
+      <div class="ach-text">
+        <div class="ach-title">Google Gemini Student Ambassador 2026</div>
+        <div class="ach-sub">Recognized by Google for AI advocacy and community engagement</div>
+      </div>
+    </div>
 
-    themeToggleBtn.addEventListener("click", () => {
-        const currentTheme = htmlElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        htmlElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-    });
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae2">🌱</div>
+      <div class="ach-text">
+        <div class="ach-title">GSSoC 2026 — Contributor &amp; Mentee</div>
+        <div class="ach-sub">GirlScript Summer of Code 2026 · Open Source Contributor</div>
+      </div>
+    </div>
 
-    /* ==========================================================================
-       MOBILE DRAWER NAVIGATION
-       ========================================================================== */
-    const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
-    const mobileDrawer = document.querySelector(".mobile-drawer");
-    const mobileLinks = document.querySelectorAll(".mobile-link");
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae3">💻</div>
+      <div class="ach-text">
+        <div class="ach-title">Nexus Spring of Code 2026 — Contributor</div>
+        <div class="ach-sub">Active open source contribution during NSoC 2026</div>
+      </div>
+    </div>
 
-    mobileMenuBtn.addEventListener("click", () => {
-        mobileDrawer.classList.toggle("open");
-        const icon = mobileMenuBtn.querySelector("i");
-        if (mobileDrawer.classList.contains("open")) {
-            icon.setAttribute("data-lucide", "x");
-        } else {
-            icon.setAttribute("data-lucide", "menu");
-        }
-        lucide.createIcons();
-    });
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae4">🏅</div>
+      <div class="ach-text">
+        <div class="ach-title">CodeAlpha Python Internship</div>
+        <div class="ach-sub">MSME-recognized internship · Python development &amp; project delivery</div>
+      </div>
+    </div>
 
-    mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            mobileDrawer.classList.remove("open");
-            const icon = mobileMenuBtn.querySelector("i");
-            icon.setAttribute("data-lucide", "menu");
-            lucide.createIcons();
-        });
-    });
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae5">🪟</div>
+      <div class="ach-text">
+        <div class="ach-title">Microsoft Certifications (3×)</div>
+        <div class="ach-sub">Explore AI Basics · Generative AI · MS 365 Copilot Chat</div>
+      </div>
+    </div>
 
-    /* ==========================================================================
-       CUSTOM CURSOR
-       ========================================================================== */
-    const cursorOutline = document.querySelector(".custom-cursor");
-    const cursorDot = document.querySelector(".custom-cursor-dot");
-    
-    let mouseX = 0, mouseY = 0;
-    let outlineX = 0, outlineY = 0;
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae6">🔐</div>
+      <div class="ach-text">
+        <div class="ach-title">Cybersecurity Certificate</div>
+        <div class="ach-sub">Great Learning · Foundations of cybersecurity &amp; threat detection</div>
+      </div>
+    </div>
 
-    document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorDot.style.left = mouseX + "px";
-        cursorDot.style.top = mouseY + "px";
-    });
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae7">🇮🇳</div>
+      <div class="ach-text">
+        <div class="ach-title">India AI Impact Pre-Summit 2026</div>
+        <div class="ach-sub">Participated at Banasthali Vidyapith · National AI initiative</div>
+      </div>
+    </div>
 
-    function animateCursor() {
-        outlineX += (mouseX - outlineX) * 0.15;
-        outlineY += (mouseY - outlineY) * 0.15;
-        cursorOutline.style.left = outlineX + "px";
-        cursorOutline.style.top = outlineY + "px";
-        requestAnimationFrame(animateCursor);
-    }
-    requestAnimationFrame(animateCursor);
+    <div class="ach-item reveal">
+      <div class="ach-emoji ae8">🎵</div>
+      <div class="ach-text">
+        <div class="ach-title">Singer @ College Fest Mayukh</div>
+        <div class="ach-sub">Performed live on stage at Banasthali Vidyapith's annual cultural fest</div>
+      </div>
+    </div>
 
-    const hoverables = document.querySelectorAll("a, button, .key, input, textarea");
-    hoverables.forEach(item => {
-        item.addEventListener("mouseenter", () => {
-            cursorOutline.style.transform = "translate(-50%, -50%) scale(1.5)";
-            cursorOutline.style.borderColor = "var(--primary-light)";
-            cursorOutline.style.backgroundColor = "rgba(139, 92, 246, 0.1)";
-        });
-        item.addEventListener("mouseleave", () => {
-            cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
-            cursorOutline.style.borderColor = "var(--accent)";
-            cursorOutline.style.backgroundColor = "transparent";
-        });
-    });
+  </div>
+</div>
+</section>
 
-    /* ==========================================================================
-       TYPEWRITER EFFECT (Hero Subtitle)
-       ========================================================================== */
-    const typewriterElement = document.getElementById("typewriter");
-    const words = [
-        "B.Tech Student.", 
-        "AI & GenAI Enthusiast.", 
-        "Cybersecurity Explorer.", 
-        "Open-Source Contributor.",
-        "Future Entrepreneur."
-    ];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
+<!-- ══════ CONTACT ══════ -->
+<section id="contact">
+<div class="section-wrap alt">
+  <div class="contact-inner">
+    <div class="contact-glow"></div>
+    <p class="sec-label reveal">// let's connect</p>
+    <h2 class="contact-big reveal">
+      Let's build<br><span class="grad">something great</span>
+    </h2>
+    <p class="contact-sub reveal">
+      Open to collaborations, open source projects, internships &amp; conversations about tech &amp; music.
+    </p>
+    <div class="contact-cards reveal">
+      <a href="https://github.com/2008mokshitatiwari-del" target="_blank" class="contact-card cc1">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        github.com/2008mokshitatiwari-del
+      </a>
+      <a href="mailto:mokshita@example.com" class="contact-card cc2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Drop me an Email
+      </a>
+    </div>
+  </div>
+</div>
+</section>
 
-    function handleTypewriter() {
-        const currentWord = words[wordIndex];
-        
-        if (isDeleting) {
-            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 50;
-        } else {
-            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 100;
-        }
+<!-- FOOTER -->
+<footer>
+  Designed &amp; coded with <span>♥</span> by Mokshita Tiwari &nbsp;·&nbsp; Banasthali Vidyapith &nbsp;·&nbsp; 2026
+</footer>
 
-        if (!isDeleting && charIndex === currentWord.length) {
-            typingSpeed = 1500;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            typingSpeed = 500;
-        }
-
-        setTimeout(handleTypewriter, typingSpeed);
-    }
-    
-    if (typewriterElement) {
-        setTimeout(handleTypewriter, 1000);
-    }
-
-    /* ==========================================================================
-       INTERACTIVE HANGMAN GAME
-       ========================================================================== */
-    const hangmanWords = [
-        "PYTHON", "INTELLIGENCE", "SECURITY", "CHATBOT", 
-        "GERMAN", "SKATING", "GYMNASTICS", "SINGING", 
-        "INNOVATION", "TECHNOLOGY", "ENTREPRENEUR", "CYBER"
-    ];
-    let selectedWord = "";
-    let guessedLetters = [];
-    let triesLeft = 6;
-    const maxTries = 6;
-
-    const wordDisplay = document.getElementById("word-display");
-    const triesLeftVal = document.getElementById("tries-left");
-    const keyboardContainer = document.getElementById("keyboard");
-    const gameStatusMsg = document.getElementById("game-status-msg");
-    const resetBtn = document.getElementById("reset-hangman-btn");
-    
-    const hangmanParts = [
-        document.querySelector(".part-head"),
-        document.querySelector(".part-body"),
-        document.querySelector(".part-left-arm"),
-        document.querySelector(".part-right-arm"),
-        document.querySelector(".part-left-leg"),
-        document.querySelector(".part-right-leg")
-    ];
-
-    function initHangman() {
-        selectedWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
-        guessedLetters = [];
-        triesLeft = maxTries;
-        triesLeftVal.textContent = triesLeft;
-        triesLeftVal.style.color = "var(--text-primary)";
-        gameStatusMsg.textContent = "";
-        gameStatusMsg.className = "status-msg";
-        
-        hangmanParts.forEach(part => {
-            if (part) part.classList.remove("drawn");
-        });
-        renderWord();
-        buildKeyboard();
-    }
-
-    function renderWord() {
-        const display = selectedWord
-            .split("")
-            .map(letter => (guessedLetters.includes(letter) ? letter : "_"))
-            .join(" ");
-        wordDisplay.textContent = display;
-    }
-
-    function buildKeyboard() {
-        keyboardContainer.innerHTML = "";
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        
-        letters.forEach(letter => {
-            const keyBtn = document.createElement("button");
-            keyBtn.textContent = letter;
-            keyBtn.classList.add("key");
-            keyBtn.addEventListener("click", () => handleGuess(letter, keyBtn));
-            keyboardContainer.appendChild(keyBtn);
-        });
-    }
-
-    function handleGuess(letter, buttonElement) {
-        guessedLetters.push(letter);
-        buttonElement.disabled = true;
-        
-        if (selectedWord.includes(letter)) {
-            buttonElement.classList.add("correct-guess");
-            renderWord();
-            checkWin();
-        } else {
-            buttonElement.classList.add("wrong-guess");
-            triesLeft--;
-            triesLeftVal.textContent = triesLeft;
-            
-            const partIndex = maxTries - triesLeft - 1;
-            if (hangmanParts[partIndex]) {
-                hangmanParts[partIndex].classList.add("drawn");
-            }
-            if (triesLeft === 2) {
-                triesLeftVal.style.color = "var(--accent-pink)";
-            }
-            checkLoss();
-        }
-    }
-
-    function checkWin() {
-        const hasWon = selectedWord.split("").every(letter => guessedLetters.includes(letter));
-        if (hasWon) {
-            gameStatusMsg.textContent = "You Won! 🎉 Outstanding Job!";
-            gameStatusMsg.classList.add("win");
-            disableAllKeys();
-        }
-    }
-
-    function checkLoss() {
-        if (triesLeft <= 0) {
-            gameStatusMsg.textContent = `Game Over! Word was: ${selectedWord}`;
-            gameStatusMsg.classList.add("lose");
-            disableAllKeys();
-            wordDisplay.textContent = selectedWord.split("").join(" ");
-        }
-    }
-
-    function disableAllKeys() {
-        const keys = keyboardContainer.querySelectorAll(".key");
-        keys.forEach(key => key.disabled = true);
-    }
-
-    resetBtn.addEventListener("click", initHangman);
-    initHangman();
-
-    /* ==========================================================================
-       AI CHATBOT DEMO OVERLAY MODAL
-       ========================================================================== */
-    const chatbotModal = document.getElementById("chatbot-modal");
-    const openChatbotBtn = document.querySelector(".open-chatbot-demo");
-    const closeChatbotBtn = document.querySelector(".modal-close");
-    const chatForm = document.getElementById("chat-demo-form");
-    const chatUserInput = document.getElementById("chat-user-input");
-    const chatMessagesContainer = document.getElementById("chat-messages");
-
-    function openModal() {
-        chatbotModal.classList.add("open");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-        chatbotModal.classList.remove("open");
-        document.body.style.overflow = "";
-    }
-
-    if (openChatbotBtn) openChatbotBtn.addEventListener("click", openModal);
-    if (closeChatbotBtn) closeChatbotBtn.addEventListener("click", closeModal);
-    chatbotModal.addEventListener("click", (e) => {
-        if (e.target === chatbotModal) closeModal();
-    });
-
-    const botAnswers = [
-        {
-            keywords: ["skills", "skill", "programming", "python", "tech", "languages"],
-            reply: "Mokshita is proficient in Python and web basics (HTML/CSS/JS). Her focus fields are Artificial Intelligence, Generative AI models, and Cybersecurity. She is also learning German!"
-        },
-        {
-            keywords: ["hobbies", "hobby", "skating", "singing", "gymnastics", "german", "languages"],
-            reply: "Outside of tech, Mokshita loves skating, practicing gymnastics, singing, and learning new things including German."
-        },
-        {
-            keywords: ["gssoc", "open source", "contribution", "git", "github"],
-            reply: "Mokshita is an active contributor to GSSoC (GirlScript Summer of Code) and participates heavily in open-source development initiatives."
-        },
-        {
-            keywords: ["college", "study", "education", "btech", "banasthali", "vidyapith"],
-            reply: "She is pursuing her B.Tech (Bachelor of Technology) at Banasthali Vidyapith, India's premier women's university."
-        },
-        {
-            keywords: ["chatbot", "chatbot project", "hangman"],
-            reply: "She has built an AI Chatbot parsing client commands and an interactive Hangman Game (which you can play right on this page!)."
-        },
-        {
-            keywords: ["german", "hallo"],
-            reply: "Hallo! Wie geht's? Mokshita enjoys learning German to explore global ideas. Wunderbar!"
-        }
-    ];
-
-    chatForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const rawText = chatUserInput.value.trim();
-        if (!rawText) return;
-
-        appendMessage(rawText, "user");
-        chatUserInput.value = "";
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-
-        setTimeout(() => {
-            const botResponse = generateBotResponse(rawText);
-            appendMessage(botResponse, "bot");
-            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-        }, 650);
-    });
-
-    function appendMessage(text, sender) {
-        const msgDiv = document.createElement("div");
-        msgDiv.classList.add("chat-msg", sender);
-        
-        const avatar = document.createElement("div");
-        avatar.classList.add("avatar-sm");
-        avatar.textContent = sender === "user" ? "ME" : "AI";
-        
-        const bubble = document.createElement("div");
-        bubble.classList.add("msg-bubble");
-        bubble.textContent = text;
-        
-        msgDiv.appendChild(avatar);
-        msgDiv.appendChild(bubble);
-        chatMessagesContainer.appendChild(msgDiv);
-    }
-
-    function generateBotResponse(userInput) {
-        const textLower = userInput.toLowerCase();
-        for (const answer of botAnswers) {
-            for (const key of answer.keywords) {
-                if (textLower.includes(key)) return answer.reply;
-            }
-        }
-        return "That's an interesting question! I am Mokshita's AI representative. Feel free to contact her using the form below, and she will get back to you! 🚀";
-    }
-
-    /* ==========================================================================
-       CONTACT FORM SUBMIT
-       ========================================================================== */
-    const contactForm = document.getElementById("contact-form");
-    const formStatus = document.getElementById("form-status");
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const name = document.getElementById("form-name").value;
-            formStatus.className = "form-status-box";
-            formStatus.textContent = "Encrypting message and routing to Mokshita...";
-            
-            setTimeout(() => {
-                formStatus.classList.add("success");
-                formStatus.textContent = `Successfully sent! Thank you, ${name}. I'll reach out to you soon!`;
-                contactForm.reset();
-            }, 1800);
-        });
-    }
-
-    /* ==========================================================================
-       SCROLL PROGRESS BAR ANIMATION & Nav links observer
-       ========================================================================== */
-    const progressFills = document.querySelectorAll(".progress-fill");
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    const observerOptions = {
-        root: null,
-        threshold: 0.2,
-        rootMargin: "-80px 0px 0px 0px"
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute("id");
-                
-                navLinks.forEach(link => {
-                    link.classList.remove("active");
-                    if (link.getAttribute("href") === `#${id}`) {
-                        link.classList.add("active");
-                    }
-                });
-                
-                if (id === "skills") {
-                    progressFills.forEach(fill => {
-                        const widthVal = fill.style.width;
-                        fill.style.width = "0px";
-                        setTimeout(() => {
-                            fill.style.width = widthVal;
-                        }, 100);
-                    });
-                }
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
-});-- JS file -->
-          /* Hero Avatar Graphic and Glassmorphism Code editor card overlap */
-.hero-avatar-container {
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--primary);
-    box-shadow: var(--shadow-glow), 0 0 30px rgba(139, 92, 246, 0.3);
-    z-index: 3;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: avatar-pulse-float 6s ease-in-out infinite alternate;
+<script>
+// ── CUSTOM CURSOR ──
+const cursor = document.getElementById('cursor');
+const trail  = document.getElementById('cursor-trail');
+let mx = 0, my = 0, tx = 0, ty = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = (mx - 9) + 'px';
+  cursor.style.top  = (my - 9) + 'px';
+});
+function animTrail() {
+  tx += (mx - tx) * 0.12;
+  ty += (my - ty) * 0.12;
+  trail.style.left = (tx - 19) + 'px';
+  trail.style.top  = (ty - 19) + 'px';
+  requestAnimationFrame(animTrail);
 }
+animTrail();
+document.querySelectorAll('a, button, .skill-chip, .fun-card, .proj-card, .ach-item').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; trail.style.transform = 'scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)';  trail.style.transform = 'scale(1)'; });
+});
 
-.hero-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: rotate(90deg); /* This rotates your photo 90 degrees clockwise to keep it straight! */
-}
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => obs.observe(el));
 
-.profile-card {
-    width: 90%;
-    position: absolute;
-    bottom: -15px;
-    right: -25px;
-    z-index: 5;
-    overflow: hidden;
-    transform: perspective(1000px) rotateY(-12deg) rotateX(12deg) scale(0.9);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    animation: card-float-offset 6s ease-in-out infinite alternate;
-}
-
-@keyframes avatar-pulse-float {
-    0% { transform: translate(-50%, -50%) translateY(0) scale(1); }
-    100% { transform: translate(-50%, -50%) translateY(-10px) scale(1.03); }
-}
-
-@keyframes card-float-offset {
-    0% { transform: perspective(1000px) rotateY(-12deg) rotateX(12deg) scale(0.9) translateY(0); }
-    100% { transform: perspective(1000px) rotateY(-10deg) rotateX(10deg) scale(0.9) translateY(-15px); }
-}
-    <script src="script.js"></script>
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (active) active.style.color = 'var(--c1)';
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+</script>
 </body>
 </html>
